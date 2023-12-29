@@ -42,4 +42,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function UserTypes(){
+        return $this->belongsTo(UserType::class, 'user_type_id', 'id');
+    }
+    public function UserGroups(){
+        return $this->belongsTo(UserGroup::class, 'user_group_id', 'id');
+    }
+    public function Permissions(){
+        return $this->hasMany(Permission::class, 'user_id', 'id');
+    }
+    public function ModulePermissions(){
+        return $this->hasMany(ModulePermission::class, 'user_id', 'id');
+    }
 }

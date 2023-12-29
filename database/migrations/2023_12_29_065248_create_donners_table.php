@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('donners', function (Blueprint $table) {
             $table->id();
-            $table->string('memberShipNo', 100)->nullable();
+            $table->string('member_ship_no', 100)->nullable();
             $table->dateTime('create_date')->nullable();
             $table->string('name', 500)->nullable();
             $table->dateTime('date_of_birth');
@@ -29,13 +29,14 @@ return new class extends Migration
             $table->string('institute',500)->nullable();
             $table->unsignedBigInteger('gender')->nullable();
             $table->unsignedBigInteger('image_id')->nullable();
-            $table->integer('nid_id')->nullable();
+            $table->unsignedBigInteger('nid_id')->nullable();
             $table->boolean('is_nid')->nullable();
             $table->timestamps();
             $table->foreign('occupation')->references('id')->on('occupations')->onDelete('cascade');
             $table->foreign('blood_group')->references('id')->on('blood_groups')->onDelete('cascade');
             $table->foreign('gender')->references('id')->on('sexes')->onDelete('cascade');
-            $table->foreign('image_id')->references('id')->on('nid_images')->onDelete('cascade');
+            $table->foreign('nid_id')->references('id')->on('nid_images')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('passport_images')->onDelete('cascade');
         });
     }
 
